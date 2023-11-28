@@ -9,12 +9,14 @@ public class LevelManager : MonoBehaviour
     public ParticleSystem particle;
     private void Start()
     {
+        Application.targetFrameRate = 60;
        
         CarMovement[] carMovements = FindObjectsOfType<CarMovement>();
         foreach (CarMovement item in carMovements)
         {
             carList.Add(item.gameObject);
         }
+        
     }
     public void CarFinished(GameObject car)
     {
