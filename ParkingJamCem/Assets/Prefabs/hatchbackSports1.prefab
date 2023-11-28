@@ -233,7 +233,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 7576386722563338562, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
   - {fileID: -1991239904168531565, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
-  - {fileID: 3412752883338701802, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
+  - {fileID: 643984211773790922, guid: b0b7c4364b5be1f4eb0c49036129a63d, type: 3}
   - {fileID: 659195688816635025, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
   - {fileID: -3963241562183589234, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
   - {fileID: 3398073514908505954, guid: 8955b60b143c00d4484d2c4aef4442f6, type: 3}
@@ -498,7 +498,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.32, z: 2.7120614}
+  m_Size: {x: 1.5, y: 1.32, z: 2.8}
   m_Center: {x: 0, y: 0.65, z: -0.0129307695}
 --- !u!65 &8161678224315143489
 BoxCollider:
@@ -511,7 +511,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.61, y: 1.2, z: 2.61}
+  m_Size: {x: 1.4, y: 1.2, z: 2.7}
   m_Center: {x: 0, y: 0.65, z: -0.0129307695}
 --- !u!114 &8161678224315143495
 MonoBehaviour:

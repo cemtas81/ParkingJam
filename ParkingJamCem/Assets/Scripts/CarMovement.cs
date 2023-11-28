@@ -11,6 +11,8 @@ public class CarMovement : MonoBehaviour
     private CinemachineDollyCart _cart;
     private LevelManager manager;
     private ParticleSystem particle;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
     void Start()
     {
         carRigidbody = GetComponent<Rigidbody>();
@@ -19,6 +21,8 @@ public class CarMovement : MonoBehaviour
         manager = FindObjectOfType<LevelManager>();
         particle = GetComponentInChildren<ParticleSystem>();
         carRigidbody.isKinematic = true;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;   
     }
 
     void Update()
@@ -90,14 +94,14 @@ public class CarMovement : MonoBehaviour
     void StartDragging(Vector2 startPosition)
     {
         isDragging = true;
-        dragStartPosition = startPosition;
+        dragStartPosition = startPosition;      
     }
 
     private void UpdateCarPosition(Vector2 currentPosition)
     {
         Vector2 dragDelta = currentPosition - dragStartPosition;
 
-        float minDragDistance = 30f;
+        float minDragDistance = 25f;
 
         // Clamp the dragDelta to be within the specified range
         dragDelta = Vector2.ClampMagnitude(dragDelta, minDragDistance);
@@ -116,6 +120,7 @@ public class CarMovement : MonoBehaviour
         Vector3 finalMovement = forwardDirection * projectedMovement;
         carRigidbody.isKinematic = false;
         carRigidbody.AddForce(finalMovement, ForceMode.VelocityChange);
+
     }
 
     void StopDragging()
@@ -161,13 +166,26 @@ public class CarMovement : MonoBehaviour
     {
         // Stop the car's movement
         StopDragging();
-
-        carRigidbody.velocity = Vector3.zero;
+   
         DOTween.Kill(transform, true);
         var rotation = transform.InverseTransformDirection(collision.transform.position);
         (rotation.x, rotation.z) = (-rotation.z, rotation.x);
-        transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform);
-          
+        //collision.transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform);
+        transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform)
+            .OnComplete(() =>
+        {
+            ResetCarPosition();
+        });
+        //Camera.main.DOShakeRotation(.2f, rotation * .2f);
     }
-
+    void ResetCarPosition()
+    {       
+        // Tween the car back to its initial position
+        transform.DOMove(initialPosition, 0.5f).OnComplete(() =>
+        {
+            // After reaching the initial position, reset rotation and make it kinematic
+            transform.rotation = initialRotation;
+            carRigidbody.isKinematic = true;
+        });
+    }
 }
