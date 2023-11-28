@@ -6,8 +6,10 @@ public class LevelManager : MonoBehaviour
 {
     public Canvas canvas;
     public List<GameObject> carList = new List<GameObject>();
+    public ParticleSystem particle;
     private void Start()
     {
+       
         CarMovement[] carMovements = FindObjectsOfType<CarMovement>();
         foreach (CarMovement item in carMovements)
         {
@@ -24,7 +26,8 @@ public class LevelManager : MonoBehaviour
     }
     IEnumerator AllFinished()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
+        particle.Play();
         Congrats();
         yield return new WaitForSeconds(3);
         NextLevel();
