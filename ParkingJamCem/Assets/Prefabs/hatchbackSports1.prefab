@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7839918108961863707}
   - component: {fileID: 1071476295095563465}
   - component: {fileID: 8489762600429148291}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1236193307312685083}
   - component: {fileID: 3151668699564575625}
   - component: {fileID: 6534114984912296187}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 6911913212872559578}
   - component: {fileID: 5370092449679315715}
   - component: {fileID: 288355348315657305}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 3133393677666561021}
   - component: {fileID: 8806160440226481286}
   - component: {fileID: 2594631460755442249}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 8212272480802932005}
   - component: {fileID: 9012573865505331040}
   - component: {fileID: 7414443050832373527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 8161678224315143489}
   - component: {fileID: 8161678224315143495}
   - component: {fileID: 8161678224315143494}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: hatchbackSports1
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -526,6 +526,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 10
+  isBumping: 0
+  maxSpeed: 9
+  acceleration: 8
+  deceleration: 16
+  carMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &8161678224315143494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_Name
       value: CFX3_Hit_SmokePuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_RootOrder

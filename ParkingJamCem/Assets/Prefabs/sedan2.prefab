@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1006679565643370870}
   - component: {fileID: 3991138164281727716}
   - component: {fileID: 5076242935188998550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8075900827829873014}
   - component: {fileID: 1297319246345004452}
   - component: {fileID: 7570010988531812846}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4009235055867263632}
   - component: {fileID: 7415848292758312427}
   - component: {fileID: 4097815418010753828}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 4842401535904111287}
   - component: {fileID: 6222215852413108846}
   - component: {fileID: 1792387919839200564}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 7898115150673859183}
   - component: {fileID: 7898115150673859187}
   - component: {fileID: 7898115150673859180}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sedan2
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.32, z: 2.45}
+  m_Size: {x: 1.6, y: 1.4, z: 2.6}
   m_Center: {x: 0, y: 0.65, z: -0.024999976}
 --- !u!65 &7898115150673859183
 BoxCollider:
@@ -427,7 +427,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1.3, z: 2.61}
+  m_Size: {x: 1.5, y: 1.3, z: 2.5}
   m_Center: {x: 0, y: 0.65, z: -0.0129307695}
 --- !u!114 &7898115150673859187
 MonoBehaviour:
@@ -442,6 +442,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 10
+  isBumping: 0
+  maxSpeed: 5
+  acceleration: 2
+  deceleration: 4
+  carMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7898115150673859180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +477,7 @@ GameObject:
   - component: {fileID: 7865673877915849800}
   - component: {fileID: 7047217344362169869}
   - component: {fileID: 8807565685312845434}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,6 +561,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_Name
       value: CFX3_Hit_SmokePuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_RootOrder

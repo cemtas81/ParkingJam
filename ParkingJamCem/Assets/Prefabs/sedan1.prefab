@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8180850383604346122}
   - component: {fileID: 2360432274724602481}
   - component: {fileID: 9148446331117653182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 367105580118494509}
   - component: {fileID: 1185100117715932660}
   - component: {fileID: 6842169943261156014}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 3099583378872484818}
   - component: {fileID: 2875316127506223511}
   - component: {fileID: 4328329010227831264}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 3148068902107899930}
   - component: {fileID: 3148068902107899928}
   - component: {fileID: 3148068902107899929}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sedan1
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -357,6 +357,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 10
+  isBumping: 0
+  maxSpeed: 7
+  acceleration: 7
+  deceleration: 14
+  carMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &3148068902107899929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +379,7 @@ MonoBehaviour:
   m_Path: {fileID: 0}
   m_UpdateMethod: 2
   m_PositionUnits: 1
-  m_Speed: 8
+  m_Speed: 7
   m_Position: 0
 --- !u!1 &4784814651102061106
 GameObject:
@@ -385,7 +392,7 @@ GameObject:
   - component: {fileID: 3907100401166270188}
   - component: {fileID: 6064821363874722366}
   - component: {fileID: 3397269910817480308}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +477,7 @@ GameObject:
   - component: {fileID: 5463961074322196204}
   - component: {fileID: 8162999850638265726}
   - component: {fileID: 25299844643872268}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,6 +561,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_Name
       value: CFX3_Hit_SmokePuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_RootOrder

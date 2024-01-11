@@ -6,6 +6,7 @@ public class CarMovement : MonoBehaviour
 {
     public float dragSpeed = 5f;
     private bool isDragging = false;
+    public bool isBumping = false;
     private Vector2 dragStartPosition;
     private Rigidbody carRigidbody;
     private CinemachineDollyCart _cart;
@@ -13,6 +14,11 @@ public class CarMovement : MonoBehaviour
     private ParticleSystem particle;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+    public float maxSpeed = 5f;
+    public float acceleration = 2f;
+    public float deceleration = 4f;
+   
+    public LayerMask carMask;
     void Start()
     {
         carRigidbody = GetComponent<Rigidbody>();
@@ -27,7 +33,8 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        HandleInput();     
+        HandleInput();
+        CheckBump();
     }
 
     void HandleInput()
@@ -122,6 +129,37 @@ public class CarMovement : MonoBehaviour
         carRigidbody.AddForce(finalMovement, ForceMode.VelocityChange);
 
     }
+    void CheckBump()
+    {
+        if (_cart.m_Speed < maxSpeed)
+        {
+            _cart.m_Speed += acceleration * Time.fixedDeltaTime;
+        }
+
+        Vector3 boxCenter = transform.position + transform.forward * 2f; // Adjust the offset value
+        Vector3 boxHalfExtents = new Vector3(.8f, 0.25f, .5f);
+
+        RaycastHit[] hits = new RaycastHit[1];
+        int hitCount = Physics.BoxCastNonAlloc(boxCenter, boxHalfExtents, transform.forward, hits, transform.rotation, .5f, carMask);
+
+        if (hitCount > 0)
+        {
+            if (_cart.m_Speed > 0)
+            {
+                _cart.m_Speed -= deceleration * Time.fixedDeltaTime;
+            }
+            isBumping = true;
+        }
+        else
+        {
+            isBumping = false;
+        }
+
+        if (_cart.m_Speed < 0)
+        {
+            _cart.m_Speed = 0;
+        }
+    }
 
     void StopDragging()
     {
@@ -131,21 +169,39 @@ public class CarMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Exit"))
+        if (other.CompareTag("Exit")&&!_cart.enabled)
         {
-            particle.Play();
-
-            if (other.gameObject.TryGetComponent<FinishPathTrigger>(out var finish))
+            if (!isBumping)
             {
-                var path = finish._path;
-                _cart.m_Path = path;
-                var closestPoint = path.FindClosestPoint( transform.position,0, -1, 10);
-                closestPoint = path.FromPathNativeUnits(closestPoint, _cart.m_PositionUnits);
+                particle.Play();
 
-                _cart.m_Position = closestPoint;
-                _cart.enabled = true;
+                if (other.gameObject.TryGetComponent<FinishPathTrigger>(out var finish))
+                {
+                    var path = finish._path;
+                    _cart.m_Path = path;
+                    var closestPoint = path.FindClosestPoint(transform.position, 0, -1, 10);
+                    closestPoint = path.FromPathNativeUnits(closestPoint, _cart.m_PositionUnits);
+                    var startPosition = path.EvaluatePositionAtUnit(closestPoint, _cart.m_PositionUnits);
+                    var startRotation = path.EvaluateOrientationAtUnit(closestPoint, _cart.m_PositionUnits);
 
+                    transform.DOMove(startPosition, 0.2f);
+
+                    transform.DORotateQuaternion(startRotation, 0.2f)
+                        .OnComplete(() =>
+                        {
+                            _cart.m_Position = closestPoint;
+                            _cart.enabled = true;
+
+                            DOVirtual.Float(_cart.m_Speed / 3f, _cart.m_Speed, 0.2f, value => _cart.m_Speed = value);
+                        });
+                    return;
+                }
             }
+            else
+            {
+               GoBack();
+            }
+
         }
         else if (other.CompareTag("Movable"))
         {
@@ -159,24 +215,29 @@ public class CarMovement : MonoBehaviour
         else if (other.CompareTag("LevelEnd"))
         {
             manager.CarFinished(this.gameObject);
+            this.gameObject.SetActive(false);
         }
+       
     }
-
+    
     void StopCarAndShake(Collider collision)
     {
-        // Stop the car's movement
-        StopDragging();
-   
-        DOTween.Kill(transform, true);
-        var rotation = transform.InverseTransformDirection(collision.transform.position);
-        (rotation.x, rotation.z) = (-rotation.z, rotation.x);
-        //collision.transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform);
-        transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform)
-            .OnComplete(() =>
+        if (!_cart.enabled)
         {
-            ResetCarPosition();
-        });
-        //Camera.main.DOShakeRotation(.2f, rotation * .2f);
+            // Stop the car's movement
+            StopDragging();
+            DOTween.Kill(transform, true);
+            var rotation = transform.InverseTransformDirection(collision.transform.position);
+            (rotation.x, rotation.z) = (-rotation.z, rotation.x);
+            //collision.transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform);
+            transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform)
+                .OnComplete(() =>
+                {
+                    ResetCarPosition();
+                });
+            //Camera.main.DOShakeRotation(.2f, rotation * .2f);
+        }
+
     }
     void ResetCarPosition()
     {       
@@ -186,6 +247,22 @@ public class CarMovement : MonoBehaviour
             // After reaching the initial position, reset rotation and make it kinematic
             transform.rotation = initialRotation;
             carRigidbody.isKinematic = true;
-        });
+            
+        });      
+
     }
+    void GoBack()
+    {
+        _cart.enabled = false;
+        StopDragging();
+        DOTween.Kill(transform, true);
+        transform.DOMove(initialPosition, .5f).OnComplete(() =>
+        {
+            transform.rotation = initialRotation;
+            carRigidbody.isKinematic = true;
+
+        });
+       
+    }
+   
 }

@@ -8,11 +8,12 @@ TagManager:
   - Exit
   - Wall
   - LevelEnd
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Car
   - Water
   - UI
   - 

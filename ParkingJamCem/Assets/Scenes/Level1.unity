@@ -2828,17 +2828,17 @@ MonoBehaviour:
   m_Waypoints:
   - position: {x: 0, y: 0, z: -0.10889244}
     roll: 0
-  - position: {x: -0.37652397, y: 0, z: 0.34910464}
+  - position: {x: -0.44313377, y: 0, z: 0.34910467}
     roll: 0
-  - position: {x: -0.29000837, y: 0, z: 0.8407199}
+  - position: {x: -0.25540107, y: 0, z: 0.97891843}
     roll: 0
-  - position: {x: 0.26687932, y: 0, z: 1.135107}
+  - position: {x: 0.26687926, y: 0, z: 1.1858757}
     roll: 0
-  - position: {x: 0.7947076, y: 0, z: 1.1605806}
+  - position: {x: 0.90942436, y: 0, z: 1.2116611}
     roll: 0
-  - position: {x: 1.2901261, y: 0, z: 1.1550493}
+  - position: {x: 1.6925828, y: 0, z: 0.8856567}
     roll: 0
-  - position: {x: 1.7074966, y: 0, z: 0.42699665}
+  - position: {x: 1.8081553, y: 0, z: -0.1114771}
     roll: 0
   - position: {x: 1.7660854, y: 0, z: -1.5029137}
     roll: 0
@@ -3584,7 +3584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046881578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.682, y: 0, z: 0.923}
+  m_LocalPosition: {x: 0.682, y: 0, z: 0.908}
   m_LocalScale: {x: 1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []

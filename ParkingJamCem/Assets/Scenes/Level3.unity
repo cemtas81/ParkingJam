@@ -5239,6 +5239,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sedan2
       objectReference: {fileID: 0}
+    - target: {fileID: 7015152688175071961, guid: ed44b9fc50923c746b9f61da6d401059,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7642895124333926499, guid: ed44b9fc50923c746b9f61da6d401059,
         type: 3}
       propertyPath: m_RootOrder

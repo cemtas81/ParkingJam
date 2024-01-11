@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 288811965393820786}
   - component: {fileID: 288811965393820784}
   - component: {fileID: 288811965393820785}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: truck1
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -97,6 +97,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 10
+  isBumping: 0
+  maxSpeed: 6
+  acceleration: 6
+  deceleration: 12
+  carMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &288811965393820785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +119,7 @@ MonoBehaviour:
   m_Path: {fileID: 0}
   m_UpdateMethod: 2
   m_PositionUnits: 1
-  m_Speed: 8
+  m_Speed: 4
   m_Position: 0
 --- !u!1 &941503299598239990
 GameObject:
@@ -125,7 +132,7 @@ GameObject:
   - component: {fileID: 338281959464662970}
   - component: {fileID: 600407874472240639}
   - component: {fileID: 1415097037570168200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +217,7 @@ GameObject:
   - component: {fileID: 6789747200792254818}
   - component: {fileID: 1113461864658236953}
   - component: {fileID: 5856914241931999446}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +302,7 @@ GameObject:
   - component: {fileID: 3074278061973240133}
   - component: {fileID: 4593791777014374812}
   - component: {fileID: 8162345792407447238}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +391,7 @@ GameObject:
   - component: {fileID: 7233305102042231428}
   - component: {fileID: 6844048743611398422}
   - component: {fileID: 3453096653490809444}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_frontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +476,7 @@ GameObject:
   - component: {fileID: 1840547359109089924}
   - component: {fileID: 8906059486767466070}
   - component: {fileID: 42707176737745436}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wheel_backRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_Name
       value: CFX3_Hit_SmokePuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
       propertyPath: m_RootOrder
