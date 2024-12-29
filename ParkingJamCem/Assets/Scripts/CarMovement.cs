@@ -137,7 +137,7 @@ public class CarMovement : MonoBehaviour
         }
 
         Vector3 boxCenter = transform.position + transform.forward * 2f; // Adjust the offset value
-        Vector3 boxHalfExtents = new Vector3(.8f, 0.25f, .5f);
+        Vector3 boxHalfExtents = new(.8f, 0.25f, .5f);
 
         RaycastHit[] hits = new RaycastHit[1];
         int hitCount = Physics.BoxCastNonAlloc(boxCenter, boxHalfExtents, transform.forward, hits, transform.rotation, .5f, carMask);
