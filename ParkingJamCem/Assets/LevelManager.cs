@@ -4,24 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
-    public Canvas canvas;
-    public List<GameObject> carList = new List<GameObject>();
-    public ParticleSystem particle;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private List<GameObject> carList = new List<GameObject>();
+    [SerializeField] private ParticleSystem particle;
     private void Start()
     {
         Application.targetFrameRate = 60;
-       
+
         CarMovement[] carMovements = FindObjectsOfType<CarMovement>();
         foreach (CarMovement item in carMovements)
         {
             carList.Add(item.gameObject);
         }
-        
+
     }
     public void CarFinished(GameObject car)
     {
         carList.Remove(car);
-        if (carList.Count==0)
+        if (carList.Count == 0)
         {
             StartCoroutine(AllFinished());
         }
@@ -41,8 +41,8 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
-        if (currentSceneIndex+1<SceneManager.sceneCountInBuildSettings)
+
+        if (currentSceneIndex + 1 < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
@@ -55,6 +55,6 @@ public class LevelManager : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        SceneManager.LoadScene(currentSceneIndex );
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

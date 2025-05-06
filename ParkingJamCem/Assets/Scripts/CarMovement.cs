@@ -17,8 +17,10 @@ public class CarMovement : MonoBehaviour
     public float maxSpeed = 5f;
     public float acceleration = 2f;
     public float deceleration = 4f;
-   
+    [SerializeField] private float speed = 10f;
     public LayerMask carMask;
+    private bool isGoingBack = false; 
+    private float goBackSpeed = 5f; 
     void Start()
     {
         carRigidbody = GetComponent<Rigidbody>();
@@ -35,8 +37,24 @@ public class CarMovement : MonoBehaviour
     {
         HandleInput();
         CheckBump();
+        if (isGoingBack)
+        {
+            MoveBackToInitialPosition();
+        }
     }
+    void MoveBackToInitialPosition()
+    {
+        
+        transform.position = Vector3.MoveTowards(transform.position, initialPosition, goBackSpeed * Time.deltaTime);
 
+        if (Vector3.Distance(transform.position, initialPosition) < 0.01f)
+        {
+            isGoingBack = false; 
+            transform.position = initialPosition; 
+            transform.rotation = initialRotation; 
+            
+        }
+    }
     void HandleInput()
     { 
         if (Input.touches.Length > 0)//Handling touch input seperately even unity allows mouse input to be used to handle touch input
@@ -106,6 +124,10 @@ public class CarMovement : MonoBehaviour
 
     private void UpdateCarPosition(Vector2 currentPosition)
     {
+        if (isGoingBack)
+        {
+            return; // Ignore dragging if the car is going back
+        }
         Vector2 dragDelta = currentPosition - dragStartPosition;
 
         float minDragDistance = 25f;
@@ -197,11 +219,6 @@ public class CarMovement : MonoBehaviour
                     return;
                 }
             }
-            else
-            {
-               GoBack();
-            }
-
         }
         else if (other.CompareTag("Movable"))
         {
@@ -224,6 +241,7 @@ public class CarMovement : MonoBehaviour
     {
         if (!_cart.enabled)
         {
+            carRigidbody.isKinematic = true;
             // Stop the car's movement
             StopDragging();
             DOTween.Kill(transform, true);
@@ -233,36 +251,18 @@ public class CarMovement : MonoBehaviour
             transform.DOPunchRotation(rotation * 3f, 0.2f, 1).SetId(transform)
                 .OnComplete(() =>
                 {
-                    ResetCarPosition();
+                    GoBack();
                 });
-            //Camera.main.DOShakeRotation(.2f, rotation * .2f);
         }
 
     }
-    void ResetCarPosition()
-    {       
-        // Tween the car back to its initial position
-        transform.DOMove(initialPosition, 0.5f).OnComplete(() =>
-        {
-            // After reaching the initial position, reset rotation and make it kinematic
-            transform.rotation = initialRotation;
-            carRigidbody.isKinematic = true;
-            
-        });      
 
-    }
     void GoBack()
     {
         _cart.enabled = false;
         StopDragging();
-        DOTween.Kill(transform, true);
-        transform.DOMove(initialPosition, .5f).OnComplete(() =>
-        {
-            transform.rotation = initialRotation;
-            carRigidbody.isKinematic = true;
-
-        });
-       
+        carRigidbody.isKinematic = true; 
+        isGoingBack = true; 
     }
-   
+
 }
