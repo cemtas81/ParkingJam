@@ -1,5 +1,5 @@
 # ParkingJam
- Simple Mobile Car Parking Game 
+ Simple Mobile Car Parking Puzzle Game 
 
 
 
